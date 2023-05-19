@@ -91,3 +91,6 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 - Clicar em "Alocar endereço IP elástico" e depois em "Alocar";
 - Selecionar o IP alocado e clicar em "Associar endereço IP elástico";
 - Selecionar a instância criada anteriormente e clicar em "Associar"
+
+---
+# Linux:
