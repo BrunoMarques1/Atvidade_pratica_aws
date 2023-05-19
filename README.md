@@ -60,7 +60,7 @@ HTTPS | TCP | 443 | 0.0.0.0/0
 <br>
 
 ### Criação da instância EC2:
-- Para criar a instância EC2 usar o seguinte comando via CLI: 
+- Para criar a instância EC2, ir no terminal da máquina usada anteriormente para logar no usuário IAM criado, e usar o seguinte comando (fazendo alterações necessárias na parte das tags): 
 ```
 
 aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-type "t3.small" --key-name "ChaveC" --security-groups "SGa1" --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  
@@ -82,4 +82,12 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
   - Permite especificar a configuração de armazenamento da instância (Nesse exemplo criamos um volume de 16gb do tipo gp2):
     - ` --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' `
   - Define as tags a serem aplicadas à instância EC2 e/ou outros recursos associados (Nesse exmplo criamos tags do tipo instancia e volume, para usar é necessário mudar os valores dentro de "Key" e "Value"):
-    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]" `
+    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]" 
+
+<br>
+
+### Gerando um IP elástico e alocando na instância EC2:
+- Ir no serviço EC2 da aws e clicar em "IPs elásticos", presente na parte de Rede e Segurança;
+- Clicar em "Alocar endereço IP elástico" e depois em "Alocar";
+- Selecionar o IP alocado e clicar em "Associar endereço IP elástico";
+- Selecionar a instância criada anteriormente e clicar em "Associar"
