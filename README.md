@@ -63,23 +63,23 @@ HTTPS | TCP | 443 | 0.0.0.0/0
 - Para criar a instância EC2 usar o seguinte comando via CLI: 
 ```
 
-aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-type "t3.small" --key-name "ChaveC" --security-groups "SGa1" --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=PB Senac},{Key=CostCenter,Value=C092000004},{Key=Project,Value=PB Senac}]" "ResourceType=volume,Tags=[{Key=Name,Value=PB Senac},{Key=CostCenter,Value=C092000004},{Key=Project,Value=PB Senac}]"
+aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-type "t3.small" --key-name "ChaveC" --security-groups "SGa1" --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  
 
 ```
 - O que faz cada parte do comando:
   - É usado para criar uma instância EC2 na AWS:
     - ` aws ec2 run-instaces ` 
-  - Especifica a ID da imagem AMI a ser usada para criar a instância EC2:
+  - Especifica a ID da imagem AMI a ser usada para criar a instância EC2 (Nesse exemplo temos a seguinte imagem: Amazon Linux 2):
     - ` --image-id "ami-06a0cd9728546d178" ` 
-  - Indica o número de instâncias EC2 que serão criadas:
+  - Indica o número de instâncias EC2 que serão criadas (Nesse exemplo foi criada apenas uma instância):
     - `--count 1`
-  - Define o tipo de instância EC2 que será criada:
+  - Define o tipo de instância EC2 que será criada (Nesse exemplo foi escolhido o seguinte tipo de instância: t3.small):
     - ` --instance-type "t3.small" ` 
-  - Especifica o nome do par de chaves EC2 que será associado à instância:
+  - Especifica o nome do par de chaves EC2 que será associado à instância (Nesse exemplo a chave escolhida foi a mesma criada anteriormente, ChaveC):
     - ` --key-name "ChaveC" ` 
-  - Define o nome do grupo de segurança EC2 a ser associado à instância:
+  - Define o nome do grupo de segurança EC2 a ser associado à instância (Nesse exemplo o Security group escolhido foi o mesmo criado anteriormente, SGa1):
     - ` --security-groups "SGa1" ` 
-  - Permite especificar a configuração de armazenamento da instância:
+  - Permite especificar a configuração de armazenamento da instância (Nesse exemplo criamos um volume de 16gb do tipo gp2):
     - ` --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' `
-  - Define as tags a serem aplicadas à instância EC2 e/ou outros recursos associados:
-    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=PB Senac},{Key=CostCenter,Value=C092000004},{Key=Project,Value=PB Senac}]" "ResourceType=volume,Tags=[{Key=Name,Value=PB Senac},{Key=CostCenter,Value=C092000004},{Key=Project,Value=PB Senac}]"`
+  - Define as tags a serem aplicadas à instância EC2 e/ou outros recursos associados (Nesse exmplo criamos tags do tipo instancia e volume, para usar é necessário mudar os valores dentro de "Key" e "Value"):
+    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]" `
