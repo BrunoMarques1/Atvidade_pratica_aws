@@ -94,3 +94,22 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 
 ---
 # Linux:
+### Configuraando o NFS entregue:
+- No console AWS procurar pelo serviço EFS;
+- Clicar em Criar sistema de arquivos;
+- Escolher um nome e a mesma VPC de sua instância EC2, depois clicar em "Ciar";
+- Na instância EC2, criar um no diretório com o comando `sudo mkdir /mnt/nfs`;
+- No serviço de EFS clique no sistema de arquivos recém criado e vá na parte de "Rede";
+- Mude todos os Security Groups para o mesmo usado na instância criada anteriromente, no meu caso usarei o SGa1;
+- Volte e clique em "Anexar";
+- Copie o código em baixo do seguinte enunciado: "Usando o cliente do NFS", e mude apenas o caminho final, para ser o diretório criado anteriormente;
+- Cole no terminal da sua instância EC2 e tecle ENTER;
+- Para não precisar rodar esse comando toda vez que reiniciar a máquina, adcione a seguinte linha para o arquivo `/etc/fstab`:
+``` 
+IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0 
+```
+- Após salvar o arquivo criar um diretório com seu nome no diretório `/mnt/nfs`, por exemplo: `sudo mkdir /mnt/nfs/Bruno`;
+
+<br>
+
+### Configurando o Apache:
