@@ -17,13 +17,15 @@
 - Fazer o versionamento da atividade;
 - Fazer a documentação explicando o processo de instalação do Linux.
 
+<br>
+
 ---
 # AWS:
 ### Criando um usuário IAM
 - Ir no serviço IAM da AWS;
 - No menu da esquerda clicar em "Usuários" e depois "Adicionar usuários";
-- Escolher um nome para o usuário e nas opções de permissões selecionar Anexar políticas diretamente;
-- Escolher a política Administrator Access;
+- Escolher um nome para o usuário e nas opções de permissões selecionar "Anexar políticas diretamente";
+- Escolher a política "Administrator Access";
 - Após seguir esses passos, criar uma chave de acesso para o usuário criado, para usar no terminal com o comando `aws configure`, como no exemplo abaixo:
 <div align="center">
   
@@ -33,16 +35,17 @@
 <br>
 
 ### Criando par de chaves
-- Já dentro do serviço EC2 da AWS, clicar em "Pares de Chaves", na parte de Rede e segurança;
+- Já dentro do serviço EC2 da AWS, clicar em "Pares de Chaves", na parte de "Rede e segurança";
 - Clicar em "Criar par de chaves";
 - Escolher um nome, o tipo e o formato para a chave. No meu caso o nome inserido foi "ChaveC", o tipo escolhido foi RSA e o formato foi .pem;
 - Salvar o arquivo da chave.
+
 <br>
 
 ### Configurando security group
 - Após a criação do par de chaves, ainda na parte de Rede e segurança, clicar em "Security Groups";
 - Clicar em "Criar grupo de segurança";
-- Escolher um nome para o security group, No meu o nome será "SGa1"
+- Escolher um nome para o security group, no meu o nome será "SGa1"
 - As regras de entrada serão as seguintes:
 <div align="center">
  
@@ -82,34 +85,76 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
   - Permite especificar a configuração de armazenamento da instância (Nesse exemplo criamos um volume de 16gb do tipo gp2):
     - ` --block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":16,"VolumeType":"gp2"}}]' `
   - Define as tags a serem aplicadas à instância EC2 e/ou outros recursos associados (Nesse exmplo criamos tags do tipo instancia e volume, para usar é necessário mudar os valores dentro de "Key" e "Value"):
-    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]" 
+    - `--tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"  "ResourceType=volume,Tags=[{Key=Name,Value=Name},{Key=Key,Value=Value},{Key=Key,Value=Value}]"`
 
 <br>
 
 ### Gerando um IP elástico e alocando na instância EC2:
-- Ir no serviço EC2 da aws e clicar em "IPs elásticos", presente na parte de Rede e Segurança;
+- Ir no serviço EC2 da aws e clicar em "IPs elásticos", presente na parte de "Rede e Segurança";
 - Clicar em "Alocar endereço IP elástico" e depois em "Alocar";
 - Selecionar o IP alocado e clicar em "Associar endereço IP elástico";
 - Selecionar a instância criada anteriormente e clicar em "Associar"
 
+<br>
+
 ---
 # Linux:
-### Configuraando o NFS entregue:
+### Configurando o NFS entregue:
 - No console AWS procurar pelo serviço EFS;
-- Clicar em Criar sistema de arquivos;
-- Escolher um nome e a mesma VPC de sua instância EC2, depois clicar em "Ciar";
-- Na instância EC2, criar um no diretório com o comando `sudo mkdir /mnt/nfs`;
+- Clicar em "Criar sistema de arquivos";
+- Escolher um nome e manter a mesma VPC de sua instância EC2, depois clicar em "Criar";
+- Na instância EC2, criar um novo diretório com o comando `sudo mkdir /mnt/nfs`;
 - No serviço de EFS clique no sistema de arquivos recém criado e vá na parte de "Rede";
 - Mude todos os Security Groups para o mesmo usado na instância criada anteriromente, no meu caso usarei o SGa1;
 - Volte e clique em "Anexar";
-- Copie o código em baixo do seguinte enunciado: "Usando o cliente do NFS", e mude apenas o caminho final, para ser o diretório criado anteriormente;
+- Copie o código em baixo do seguinte enunciado: "Usando o cliente do NFS", e mude apenas o caminho final para o diretório criado anteriormente;
 - Cole no terminal da sua instância EC2 e tecle ENTER;
 - Para não precisar rodar esse comando toda vez que reiniciar a máquina, adcione a seguinte linha para o arquivo `/etc/fstab`:
 ``` 
 IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0 
 ```
-- Após salvar o arquivo criar um diretório com seu nome no diretório `/mnt/nfs`, por exemplo: `sudo mkdir /mnt/nfs/Bruno`;
+- Após salvar o arquivo, criar um diretório com seu nome no caminho `/mnt/nfs`, por exemplo: `sudo mkdir /mnt/nfs/Bruno`;
 
 <br>
 
 ### Configurando o Apache:
+- Usar o comando sudo `yum update -y` para atualizar o sistema.
+- Usar o comando sudo `yum install httpd -y` para instalar o apache.
+- Usar o comando sudo `systemctl start httpd` para iniciar o apache.
+- Usar o comando sudo `systemctl enable httpd` para habilitar o apache para iniciar automaticamente.
+- Usar o comando `sudo systemctl status httpd` para verificar o status do apache.
+
+<br>
+
+### Criando script de validação do serviço:
+<details>
+<summary>Configurar horario/data</summary>
+ 
+- Antes de criar o script, vamos configurar a data da máquina, use o comando `date`, se o horário estiver de acordo com o de sua localização, pode pular essa parte;
+- No terminal da sua instância EC2, use o comando `timedatectl list-timezones`, ele irá listar os fusos horários disponíveis;
+- Após achar o seu fuso horário, use o comando `sudo timedatectl set-timezone <nome_do_fuso_horario>`;
+- Use o comando `timedatectl` para ver se o fuso horário foi configurado corretamente.
+
+ </details>
+  
+ - Crie o arquivo que será o script com o seguinte comando `vi script.sh`
+ - Dentro do arquivo, use o seguite script: 
+```bash
+#!/bin/bash
+
+DATA=$(date +%d/%m/%Y)
+HORA=$(date +%H:%M:%S)
+SERVICO="httpd"
+STATUS=$(systemctl is-active $SERVICO)
+
+if [ $STATUS == "active" ]; then
+    MENSAGEM="O serviço $SERVICO está online"
+    echo "$MENSAGEM - Data: $DATA - Hora: $HORA" >> /mnt/nfs/Bruno/servico_ON.txt
+else
+    MENSAGEM="O serviço $SERVICO está offline"
+    echo "$MENSAGEM - Data: $DATA - Hora: $HORA" >> /mnt/nfs/Bruno/servico_OFF.txt
+fi
+ ```
+  
+
+  
