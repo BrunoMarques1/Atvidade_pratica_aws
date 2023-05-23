@@ -21,7 +21,7 @@
 
 ---
 # AWS:
-### Criando um usuário IAM
+### Criando um usuário IAM:
 - Ir no serviço IAM da AWS;
 - No menu da esquerda clicar em "Usuários" e depois "Adicionar usuários";
 - Escolher um nome para o usuário e nas opções de permissões selecionar "Anexar políticas diretamente";
@@ -34,7 +34,7 @@
 </div>
 <br>
 
-### Criando par de chaves
+### Criando par de chaves:
 - Já dentro do serviço EC2 da AWS, clicar em "Pares de Chaves", na parte de "Rede e segurança";
 - Clicar em "Criar par de chaves";
 - Escolher um nome, o tipo e o formato para a chave. No meu caso o nome inserido foi "ChaveC", o tipo escolhido foi RSA e o formato foi .pem;
@@ -42,7 +42,7 @@
 
 <br>
 
-### Configurando security group
+### Configurando security group:
 - Após a criação do par de chaves, ainda na parte de Rede e segurança, clicar em "Security Groups";
 - Clicar em "Criar grupo de segurança";
 - Escolher um nome para o security group, no meu o nome será "SGa1"
@@ -136,6 +136,7 @@ A seguir, os comandos a serem usados no terminal para configurar o NFS:
 - Após configurar o NFS criar um diretório com seu nome, por exemplo, usando o comando `sudo mkdir /mnt/nfs/Bruno`.
   
 Para configurar na instância que será o cliente:
+  
 A seguir, os comandos a serem usados no terminal para configurar o NFS:
 - Usar o comando `sudo yum install nfs-utils -y` para instalar os pacotes do NFS;
 - Usar o comando `sudo mkdir /mnt/nfs` para criar o diretório do NFS;
