@@ -118,10 +118,10 @@ IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0
 <br>
 
 ### Configurando o Apache:
-- Usar o comando sudo `yum update -y` para atualizar o sistema.
-- Usar o comando sudo `yum install httpd -y` para instalar o apache.
-- Usar o comando sudo `systemctl start httpd` para iniciar o apache.
-- Usar o comando sudo `systemctl enable httpd` para habilitar o apache para iniciar automaticamente.
+- Usar o comando sudo `yum update -y` para atualizar o sistema;
+- Usar o comando sudo `yum install httpd -y` para instalar o apache;
+- Usar o comando sudo `systemctl start httpd` para iniciar o apache;
+- Usar o comando sudo `systemctl enable httpd` para habilitar o apache para iniciar automaticamente;
 - Usar o comando `sudo systemctl status httpd` para verificar o status do apache.
 
 <br>
@@ -137,7 +137,7 @@ IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0
 
  </details>
   
- - Crie o arquivo que será o script com o seguinte comando `vi script.sh`
+ - Crie o arquivo que será o script com o seguinte comando `vi script.sh`;
  - Dentro do arquivo, use o seguite script: 
 ```bash
 #!/bin/bash
@@ -155,6 +155,14 @@ else
     echo "$MENSAGEM - Data: $DATA - Hora: $HORA" >> /mnt/nfs/Bruno/servico_OFF.txt
 fi
  ```
+
+<br>
   
+### Preparando execução automatizada do script a cada 5 minutos:
+  - Usar o comando `crontab -e`;
+  - Adicionar a seguinte linha no arquvio que foi aberto (Substituindo a parte escrita "CAMINHO" pelo caminho correto até seu script):
+  ```
+  */5 * * * * /CAMINHO/script.sh
+  ```
 
   
