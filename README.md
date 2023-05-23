@@ -164,5 +164,6 @@ fi
   ```
   */5 * * * * /CAMINHO/script.sh
   ```
+  - Após salvar o arquvio, use o comando `crontab -l`, para verificar se foi tudo configurado corretamente.
 
   
