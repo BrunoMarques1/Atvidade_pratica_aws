@@ -102,7 +102,7 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 ### Configurando o NFS entregue:
 
 <details>
-<summary> Usando o serviço EFS da AWS </summary>
+<summary> Usando o serviço EFS da AWS (usado para essa atividade) </summary>
   
 - No console AWS procurar pelo serviço EFS;
 - Clicar em "Criar sistema de arquivos";
