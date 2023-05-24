@@ -200,5 +200,23 @@ fi
   */5 * * * * /CAMINHO/script.sh
   ```
   - Após salvar o arquvio, use o comando `crontab -l`, para verificar se foi tudo configurado corretamente.
-
+  
+<br>
+  
+### Processo de instalação do linux no VM Virtua Box:
+- Faça o download do Oracle VM VirtualBox em https://www.virtualbox.org/wiki/Downloads e instale-o em seu sistema operacional;
+- Abra o Oracle VM VirtualBox e clique em "Novo" para criar uma nova máquina virtual;
+- Insira um nome para a máquina virtual (por exemplo, "Oracle Linux 8.6") e selecione o tipo como "Linux" e a versão como "Oracle (64-bit)";
+- Após clicar em "Próximo", atribua uma quantidade de memória RAM para a máquina virtual. Recomenda-se um valor mínimo de 2048 MB (2 GB);
+- Após clicar em "Próximo", selecione o tamanho de disco desejado e clique em "Próximo", depois clique em "Finalizar";
+- Selecione a máquina virtual recém-criada na lista do Oracle VM VirtualBox e clique em "Configurações";
+- Na guia "Sistema", vá para a seção "Processador" e defina o número de processadores alocados à máquina virtual. Recomenda-se um valor com base na capacidade do seu sistema; 
+- Na guia "Armazenamento", clique onde tem um desenho de um disco, escrito "Vazio", e irá abrir uma aba na direita, clique no novo simbolo de disco que apareceu e selecione a opção "Escolher uma imagem de disco", escolha a ISO do Oracle linux, que pode ser baixada no link https://yum.oracle.com/oracle-linux-isos.html (Imagem ilustrativa a baixo);
+  ![exemplo](https://github.com/BrunoMarques1/Atvidade_pratica_aws/assets/127341401/2115fb76-4adf-4452-897a-5a02f92723a2)
+- Na guia "Rede", selecione "Adaptador de rede 1" e escolha o tipo de conexão de acordo com suas necessidades;
+- Clique em "OK" para salvar as configurações da máquina virtual;
+- Inicie a máquina virtual selecionando-a na lista do Oracle VM VirtualBox e clicando em "Iniciar"; 
+- Durante a instalação, defina as configurações de idioma, teclado, senha de root e particionamento de disco de acordo com suas preferências;
+- Aguarde até que a instalação seja concluída e a máquina virtual seja reiniciada.
+  
   
