@@ -113,7 +113,7 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 - Volte e clique em "Anexar";
 - Copie o código em baixo do seguinte enunciado: "Usando o cliente do NFS", e mude apenas o caminho final para o diretório criado anteriormente;
 - Cole no terminal da sua instância EC2 e tecle ENTER;
-- Para não precisar rodar esse comando toda vez que reiniciar a máquina, adcione a seguinte linha para o arquivo `/etc/fstab`:
+- Para não precisar rodar esse comando toda vez que reiniciar a máquina, adicione a seguinte linha para o arquivo `/etc/fstab`:
 ``` 
 IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0 
 ```
