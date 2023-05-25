@@ -119,7 +119,7 @@ IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0
 <br>
 
 ### Configurando o Apache:
-A seguir, os comandos a serem usados no terminal para configurar o NFS:
+A seguir, os comandos a serem usados no terminal para configurar o Apache:
 - Usar o comando `sudo yum update -y` para atualizar o sistema;
 - Usar o comando `sudo yum install httpd -y` para instalar o apache;
 - Usar o comando `sudo systemctl start httpd` para iniciar o apache;
