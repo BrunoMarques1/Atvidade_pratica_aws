@@ -101,9 +101,6 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 # Linux:
 ### Configurando o NFS entregue:
 
-<details>
-<summary> Usando o serviço EFS da AWS (usado para essa atividade) </summary>
-  
 - No console AWS procurar pelo serviço EFS;
 - Clicar em "Criar sistema de arquivos";
 - Escolher um nome e manter a mesma VPC de sua instância EC2, depois clicar em "Criar";
@@ -118,36 +115,6 @@ aws ec2 run-instances --image-id "ami-06a0cd9728546d178" --count 1 --instance-ty
 IP_OU_DNS_DO_NFS:/ /mnt/nfs nfs defaults 0 0 
 ```
 - Após salvar o arquivo, criar um diretório com seu nome no caminho `/mnt/nfs`, por exemplo: `sudo mkdir /mnt/nfs/Bruno`;
-  
-</details>
-
-<details>
-<summary> Direto no Linux </summary>
-
-Para configurar na instância que será o server:
-A seguir, os comandos a serem usados no terminal para configurar o NFS:
-- Usar o comando `sudo yum update` para atualizar os pacotes do programa;
-- Usar o comando `sudo yum install nfs-utils -y` para instalar os pacotes do NFS;
-- Usar o comando `systemctl start nfs-server` para iniciar o NFS;
-- Use o comando `sudo mkdir /mnt/nfs -m 777` para criar o diretório do NFS;
-- Use o comando `vi /etc/exports` e adicione a seguinte linha `/mnt/nfs * (rw,sync,no_root_squash)`;
-- Use o comando `sudo systemctl restart nfs-server` para aplicar as configurações;
-- Use o comando `sudo systemctl enable nfs-server` para para iniciar automaticamente na inicialização do sistema;
-- Após configurar o NFS criar um diretório com seu nome, por exemplo, usando o comando `sudo mkdir /mnt/nfs/Bruno`.
-  
-Para configurar na instância que será o cliente:
-  
-A seguir, os comandos a serem usados no terminal para configurar o NFS:
-- Usar o comando `sudo yum install nfs-utils -y` para instalar os pacotes do NFS;
-- Usar o comando `sudo mkdir /mnt/nfs` para criar o diretório do NFS;
-- Usar o comando `sudo mount -t nfs IP_DO_SERVIDOR:/mnt/nfs /mnt/nfs` para montar o compartilhamento NFS (substituindo a parte "IP_DO_SERVIDOR");
-- Para não precisar rodar esse comando toda vez que reiniciar a máquina, adcione a seguinte linha para o arquivo `/etc/fstab`:
-``` 
-IP_DO_SERVIDOR:/mnt/nfs /mnt/nfs nfs defaults 0 0 
-```
-- Use o comando `sudo systemctl restart nfs-utils` para aplicar as configurações.
-  
-</details>
 
 <br>
 
